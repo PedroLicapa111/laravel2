@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use App\Models\Seguimiento;
+use Illuminate\Pagination\Paginator;
 
 class PagesController extends Controller
 {
     //
-    public function fnIndex () {
+    public function fnIndex () {   
         return view('welcome');
     }
 
@@ -36,8 +37,9 @@ class PagesController extends Controller
 
         $xUpdateAlumnos->save();
 
-        //return view('pagLista', compact('xAlumnos'));
-        return back() -> with('msj', 'Se actualizó con éxito...');
+        $xAlumnos = Estudiante::all();
+        return view('pagLista', compact('xAlumnos'));
+        //return back() -> with('msj', 'Se actualizó con éxito...');
     }
 
 
@@ -76,8 +78,10 @@ class PagesController extends Controller
         return back() -> with ('msj', 'Se elimino con éxito...');
     }
 
-    public function fnLista () {
+    public function fnLista () {       
+
         $xAlumnos = Estudiante::all(); //datos BD
+        $xAlumnos = Estudiante::paginate(1);
         return view('pagLista', compact('xAlumnos'));
     }
 
@@ -90,6 +94,7 @@ class PagesController extends Controller
 
     public function fnListaSeg () {
         $xAlumnosSeg = Seguimiento::all(); //datos BD
+        $xAlumnosSeg = Seguimiento::paginate(1);
         return view('pagListaSeg', compact('xAlumnosSeg'));
     }
 
@@ -123,7 +128,39 @@ class PagesController extends Controller
 
         $xUpdateAlumnosSeg->save();
 
-        //return view('pagLista', compact('xAlumnos'));       
-        return back() -> with('msj', 'Se actualizó(seg) con éxito...');
+        $xAlumnosSeg = Seguimiento::all();
+        return view('pagListaSeg', compact('xAlumnosSeg'));      
+        //return back() -> with('msj', 'Se actualizó(seg) con éxito...');
+    }
+
+    public function fnRegistrarSeg (Request $request) {
+
+        //return $request;          //verificando "token" y datos recibidos
+
+        $request -> validate([
+            'idSeg'=>'required',
+            'idEst'=>'required',
+            'traAct'=>'required',
+            'ofiAct'=>'required',
+            'satEst'=>'required',
+            'fecSeg'=>'required',
+            'estSeg'=>'required'          
+        ]);
+
+        $nuevoEstudianteSeg = new Seguimiento;
+
+        $nuevoEstudianteSeg->idSeg  = $request->idSeg;
+        $nuevoEstudianteSeg->idEst  = $request->idEst;
+        $nuevoEstudianteSeg->traAct  = $request->traAct;
+        $nuevoEstudianteSeg->ofiAct  = $request->ofiAct;
+        $nuevoEstudianteSeg->satEst  = $request->satEst;
+        $nuevoEstudianteSeg->fecSeg  = $request->fecSeg;
+        $nuevoEstudianteSeg->estSeg  = $request->estSeg;
+
+        $nuevoEstudianteSeg->save();
+
+        $xAlumnosSeg = Seguimiento::all();
+        return view('pagListaSeg', compact('xAlumnosSeg'));
+        //return back()->with('msj', 'Se registró(seg) con éxito.');
     }
 }

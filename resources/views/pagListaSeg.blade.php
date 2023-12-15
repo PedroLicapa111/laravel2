@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('Estudiante.xRegistrar') }}" method="post" class="d-grid gap-2">
+    <form action="{{ route('Seguimiento.xRegistrarSeg') }}" method="post" class="d-grid gap-2">
         @csrf
 
         @error('idSeg')
@@ -38,12 +38,12 @@
         <input type="text" name="idSeg" placeholder="Id Seguimiento" value="{{ old('idSeg') }}" class="form-control mb-2">
         <input type="text" name="idEst" placeholder="Id Estudiante" value="{{ old('idEst') }}" class="form-control mb-2">
         <select name="traAct" class="form-control mb-2">
-            <option value="">Trabaja?</option>
+            <option value="">Seleccione: Trabaja?</option>
             <option value="0">Sí</option>
             <option value="1">No</option>            
         </select>        
         <select name="ofiAct" class="form-control mb-2">
-            <option value="">Oficio actual...</option>
+            <option value="">Seleciione Oficio actual</option>
             @for($i=1; $i < 16; $i++)
                 <option value="{{$i}}"> {{$i}}cp</option>
             @endfor 
@@ -56,7 +56,11 @@
             <option value="3">Muy bueno</option>
         </select>
         <input type="date" name="fecSeg" placeholder="Fecha de seguimiento" value="{{ old('fecSeg') }}" class="form-control mb-2">
-        <input type="text" name="estSeg" placeholder="Estado de seguimiento" value="{{ old('estSeg') }}" class="form-control mb-2">
+        <select name="satEst" class="form-control mb-2">
+            <option value="">Estado Seguimiento:</option>
+            <option value="0">0</option>
+            <option value="1">1</option>            
+        </select>
         <button class="btn btn-primary" type="submit">Agregar</button>
     </form>
     <br/>
@@ -96,5 +100,6 @@
         </tbody>
     </table>
 
+    {{ $xAlumnosSeg -> Links('pagination::bootstrap-5')}}
     
 @endsection

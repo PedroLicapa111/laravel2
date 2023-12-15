@@ -17,15 +17,19 @@ Route::put('/actualizar/{id}', [PagesController::class, 'fnUpdate']) -> name('Es
 
 Route::delete('/eliminar/{id}', [PagesController::class, 'fnEliminar'])-> name('Estudiante.xEliminar');
 
-Route::get('/galeria/{numero?}', [PagesController::class, 'fnGaleria']) -> where('numero', '[0-9]+') -> name ('xGaleria');
+
 
 Route::get('/seguimiento', [PagesController::class, 'fnListaSeg']) -> name('xListaSeg');
+Route::post('/seguimiento', [PagesController::class, 'fnRegistrarSeg']) -> name('Seguimiento.xRegistrarSeg');
+
 Route::get('/detalleSeg/{id}',[PagesController::class, 'fnEstDetalleSeg']) -> name('Seguimiento.xDetalleSeg');
 
 Route::get('/actualizarSeg/{id}', [PagesController::class, 'fnEstActualizarSeg']) -> name('Seguimiento.xActualizarSeg');
 Route::put('/actualizarSeg/{id}', [PagesController::class, 'fnUpdateSeg']) -> name('Seguimiento.xUpdateSeg');
 
 Route::delete('/eliminarSeg/{id}', [PagesController::class, 'fnEliminarSeg'])-> name('Seguimiento.xEliminarSeg');
+
+
 
 /*
 Route::get('/dashboard', function () {

@@ -96,5 +96,6 @@
         </tbody>
     </table>
 
-    {{$xAlumnos->Links}}
+    {{ $xAlumnos -> Links('pagination::bootstrap-5') }}
+    
 @endsection

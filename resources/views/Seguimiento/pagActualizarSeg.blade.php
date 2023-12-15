@@ -37,28 +37,32 @@
         @endif
 
         
-        <input type="text" name="idSeg" placeholder="Id Seguimiento" value="{{ old('idSeg') }}" class="form-control mb-2">
-        <input type="text" name="idEst" placeholder="Id Estudiante" value="{{ old('idEst') }}" class="form-control mb-2">
+        <input type="text" name="idSeg" placeholder="Id Seguimiento" value="{{ $xActAlumnosSeg->idSeg }}" class="form-control mb-2">
+        <input type="text" name="idEst" placeholder="Id Estudiante" value="{{ $xActAlumnosSeg->idEst }}" class="form-control mb-2">
         <select name="traAct" class="form-control mb-2">
             <option value="">Seleccione: Trabaja?</option>
             <option value="0" @if($xActAlumnosSeg->traAct == 0) {{"SELECTED"}} @endif>Sí</option>
             <option value="1" @if($xActAlumnosSeg->traAct == 1) {{"SELECTED"}} @endif>No</option>            
         </select>        
         <select name="ofiAct" class="form-control mb-2">
-            <option value="">Oficio actual...</option>
+            <option value="">Seleccione Oficio actual</option>
             @for($i=1; $i < 16; $i++)
                 <option value="{{$i}}" @if ($xActAlumnosSeg->ofiAct == $i) {{"SELECTED"}} @endif> {{$i}}cp</option>
             @endfor 
         </select>        
         <select name="satEst" class="form-control mb-2">
-            <option value="">Seleccione stado Seguimiento:</option>
+            <option value="">Seleccione Estado Seguimiento:</option>
             <option value="0" @if($xActAlumnosSeg->satEst == 0) {{"SELECTED"}} @endif>No está satisfecho</option>
             <option value="1" @if($xActAlumnosSeg->satEst == 1) {{"SELECTED"}} @endif>Regular</option>
             <option value="2" @if($xActAlumnosSeg->satEst == 2) {{"SELECTED"}} @endif>Bueno</option>
             <option value="3" @if($xActAlumnosSeg->satEst == 3) {{"SELECTED"}} @endif>Muy bueno</option>
         </select>
-        <input type="date" name="fecSeg" placeholder="Fecha de seguimiento" value="{{ old('fecSeg') }}" class="form-control mb-2">
-        <input type="text" name="estSeg" placeholder="Estado de seguimiento" value="{{ old('estSeg') }}" class="form-control mb-2">
+        <input type="date" name="fecSeg" placeholder="Fecha de seguimiento" value="{{ $xActAlumnosSeg->fecSeg }}" class="form-control mb-2">
+        <select name="satEst" class="form-control mb-2">
+            <option value="">Seleccione Estado Seguimiento:</option>
+            <option value="0" @if($xActAlumnosSeg->satEst == 0) {{"SELECTED"}} @endif>0</option>
+            <option value="1" @if($xActAlumnosSeg->satEst == 1) {{"SELECTED"}} @endif>1</option>            
+        </select>
         <button class="btn btn-primary" type="submit">Actualizar Seguimiento</button>
         
     </form>
